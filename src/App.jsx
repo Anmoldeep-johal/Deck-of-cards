@@ -134,8 +134,7 @@ function App() {
       {/* Deck component: click to draw one */}
       <Deck deckEmpty={cardsLeft.length === 0} onDraw={drawCard} />
 
-      <Buttons onDealFive={dealFiveCards} />
-      <Buttons onDealSeven={dealSevenCards} />
+      <Buttons onDealFive={dealFiveCards} onDealSeven={dealSevenCards} />
 
       {/* Card list: shows images for cardsVisible */}
       <List cards={cardsVisible} />
