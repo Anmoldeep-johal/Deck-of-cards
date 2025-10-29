@@ -108,24 +108,28 @@ function App() {
     setSelectedCard(null);
   }
 
-
-
-
-  function dealSevenCards(){
-    const newDeck= createDeck();
+  function dealSevenCards() {
+    const newDeck = createDeck();
     const cardsDealt = [];
-    for(let i=0; i<7;i++){
-      const randomIndex = Math.floor(Math.random()*newDeck.length);//choose a random index of card.
-      const randomCardChosen = newDeck[randomIndex];//take that random card out
-      newDeck.splice(randomIndex,1);//take that card out of deck.
+    for (let i = 0; i < 7; i++) {
+      const randomIndex = Math.floor(Math.random() * newDeck.length); //choose a random index of card.
+      const randomCardChosen = newDeck[randomIndex]; //take that random card out
+      newDeck.splice(randomIndex, 1); //take that card out of deck.
       cardsDealt.push(randomCardChosen); //add it to player screen.
     }
 
     setCardsLeft(newDeck);
     setCardsVisible(cardsDealt);
     setSelectedCard(null);
-    }
-  
+  }
+
+  // RESET — returns all cards to the deck
+  function resetGame() {
+    setCardsLeft(createDeck()); // recreate full deck of 52 cards
+    setCardsVisible([]); // clear visible cards
+    setSelectedCard(null); // unselect any card
+    setText("Deck reset. Let's play again!"); // update message
+  }
 
   return (
     <div className="app">
@@ -134,7 +138,11 @@ function App() {
       {/* Deck component: click to draw one */}
       <Deck deckEmpty={cardsLeft.length === 0} onDraw={drawCard} />
 
-      <Buttons onDealFive={dealFiveCards} onDealSeven={dealSevenCards} />
+      <Buttons
+        onDealFive={dealFiveCards}
+        onDealSeven={dealSevenCards}
+        onReset={resetGame}
+      />
 
       {/* Card list: shows images for cardsVisible */}
       <List cards={cardsVisible} />
