@@ -132,6 +132,12 @@ function App() {
     setSelectedCard(null);
   }
 
+  function regroupCards() {
+    const shuffled = [...cardsVisible].sort(() => Math.random() - 0.5);
+    setCardsVisible(shuffled);
+    setSelectedCard(null);
+  }
+
 
 
 
@@ -166,6 +172,7 @@ function App() {
         onDealSeven={dealSevenCards}
         onReset={resetGame}
         onToss={tossCard}
+          onRegroup={regroupCards}
       />
 
       
