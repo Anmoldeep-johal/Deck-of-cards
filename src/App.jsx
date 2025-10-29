@@ -137,27 +137,58 @@ function App() {
     setCardsVisible(shuffled);
     setSelectedCard(null);
   }
+  // Wildcard (add random new card)
+  function addWildcard() {
+    const suits = ["♥", "♦", "♣", "♠"];
+    const units = [
+      "A",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "J",
+      "Q",
+      "K",
+    ];
 
+    const randomSuit = suits[Math.floor(Math.random() * suits.length)];
+    const randomUnit = units[Math.floor(Math.random() * units.length)];
 
+    const suitName =
+      randomSuit === "♥"
+        ? "hearts"
+        : randomSuit === "♦"
+        ? "diamonds"
+        : randomSuit === "♣"
+        ? "clubs"
+        : "spades";
 
+    const valueName =
+      randomUnit === "A"
+        ? "ace"
+        : randomUnit === "J"
+        ? "jack"
+        : randomUnit === "Q"
+        ? "queen"
+        : randomUnit === "K"
+        ? "king"
+        : randomUnit;
 
+    const imageFile = `${valueName}_of_${suitName}.png`;
 
+    const newCard = {
+      newSuit: randomSuit,
+      newUnit: randomUnit,
+      image: imageFile,
+    };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    setCardsVisible([...cardsVisible, newCard]);
+  }
 
   return (
     <div className="app">
@@ -172,10 +203,10 @@ function App() {
         onDealSeven={dealSevenCards}
         onReset={resetGame}
         onToss={tossCard}
-          onRegroup={regroupCards}
+        onRegroup={regroupCards}
+        onWildcard={addWildcard}
       />
 
-      
       <List cards={cardsVisible} />
     </div>
   );
