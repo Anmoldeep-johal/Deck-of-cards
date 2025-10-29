@@ -237,6 +237,12 @@ function App() {
         selectedIndex={currentSelectedCard}
         onSelect={handleCardClick}
       />
+      <footer className="footer">
+        <p>
+          © 2025 Anmoldeep Kaur — React Card Deck Game |
+          
+        </p>
+      </footer>
     </div>
   );
 }
