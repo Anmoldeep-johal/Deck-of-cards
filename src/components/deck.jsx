@@ -1,15 +1,12 @@
-
 import React from "react";
 
 export default function Deck({ deckEmpty, onDraw }) {
   return (
     <div
       className={`deck ${deckEmpty ? "deck-empty" : ""}`}
-      onClick={!deckEmpty ? onDraw : null}
-      role="button"
-      tabIndex={0}
+      onClick={!deckEmpty ? onDraw : undefined}
     >
-      {deckEmpty ? "No Cards Remaining" : "Click deck to draw"}
+      {deckEmpty ? "No cards remaining" : "Click deck to draw a card"}
     </div>
   );
 }

@@ -1,28 +1,19 @@
-
 import React from "react";
 
-// This component shows the visible cards. It expects each card object
-// to have properties: newUnit, newSuit, image (filename).
-export default function List({ cards = [] }) {
+export default function List({ cards = [], onSelect, selectedIndex }) {
   return (
     <div className="cards">
-      {cards.map((card, idx) => (
-        <div className="card" key={idx}>
-          {/* Show image if exists in assets */}
+      {cards.map((card, index) => (
+        <div
+          key={index}
+          className={`card ${index === selectedIndex ? "selected" : ""}`}
+          onClick={() => onSelect && onSelect(index)}
+        >
           <img
-            src={`/src/assets/cards/${card.image}`}
+            src={new URL(`../assets/cards/${card.image}`, import.meta.url).href}
             alt={`${card.newUnit} ${card.newSuit}`}
-            width="80"
-            height="120"
-            onError={(e) => {
-              // If image missing, show plain text fallback
-              e.target.style.display = "none";
-            }}
+            style={{ width: "80px", height: "120px", borderRadius: "6px" }}
           />
-          {/* fallback text (visible if image not found) */}
-          <div className="card-text">
-            {card.newUnit} {card.newSuit}
-          </div>
         </div>
       ))}
     </div>
