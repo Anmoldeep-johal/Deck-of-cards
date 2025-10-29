@@ -124,13 +124,18 @@ function App() {
     setSelectedCard(null);
     setText("Deck reset. Let's play again!");
   }
-  function tossCard() {
-    if (currentSelectedCard === null) return;
-    const updated = [...cardsVisible];
-    updated.splice(currentSelectedCard, 1);
-    setCardsVisible(updated);
-    setSelectedCard(null);
-  }
+ function tossCard() {
+   if (currentSelectedCard === null) {
+     alert("Select a card to toss!");
+     return;
+   }
+
+   const updated = [...cardsVisible];
+   updated.splice(currentSelectedCard, 1); // remove selected card
+   setCardsVisible(updated);
+   setSelectedCard(null);
+ }
+
 
   function regroupCards() {
     const shuffled = [...cardsVisible].sort(() => Math.random() - 0.5);
@@ -190,6 +195,27 @@ function App() {
     setCardsVisible([...cardsVisible, newCard]);
   }
 
+  function handleCardClick(index) {
+    // If no card is currently selected  select this one
+    if (currentSelectedCard === null) {
+      setSelectedCard(index);
+    }
+    // If the same card is clicked again  unselect
+    else if (currentSelectedCard === index) {
+      setSelectedCard(null);
+    }
+    // If another card is clicked while one is selected  swap
+    else {
+      const updated = [...cardsVisible];
+      [updated[currentSelectedCard], updated[index]] = [
+        updated[index],
+        updated[currentSelectedCard],
+      ];
+      setCardsVisible(updated);
+      setSelectedCard(null);
+    }
+  }
+
   return (
     <div className="app">
       <h1>{text}</h1>
@@ -206,8 +232,11 @@ function App() {
         onRegroup={regroupCards}
         onWildcard={addWildcard}
       />
-
-      <List cards={cardsVisible} />
+      <List
+        cards={cardsVisible}
+        selectedIndex={currentSelectedCard}
+        onSelect={handleCardClick}
+      />
     </div>
   );
 }
