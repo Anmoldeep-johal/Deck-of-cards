@@ -108,6 +108,25 @@ function App() {
     setSelectedCard(null);
   }
 
+
+
+
+  function dealSevenCards(){
+    const newDeck= createDeck();
+    const cardsDealt = [];
+    for(let i=0; i<7;i++){
+      const randomIndex = Math.floor(Math.random()*newDeck.length);//choose a random index of card.
+      const randomCardChosen = newDeck[randomIndex];//take that random card out
+      newDeck.splice(randomIndex,1);//take that card out of deck.
+      cardsDealt.push(randomCardChosen); //add it to player screen.
+    }
+
+    setCardsLeft(newDeck);
+    setCardsVisible(cardsDealt);
+    setSelectedCard(null);
+    }
+  
+
   return (
     <div className="app">
       <h1>{text}</h1>
@@ -115,8 +134,8 @@ function App() {
       {/* Deck component: click to draw one */}
       <Deck deckEmpty={cardsLeft.length === 0} onDraw={drawCard} />
 
-      {/* Buttons: Deal 5 is wired */}
       <Buttons onDealFive={dealFiveCards} />
+      <Buttons onDealSeven={dealSevenCards} />
 
       {/* Card list: shows images for cardsVisible */}
       <List cards={cardsVisible} />
