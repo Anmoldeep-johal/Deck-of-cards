@@ -76,6 +76,7 @@ body {
 }
 .card-text {
   position: absolute;
-  font-weight: bold; /* hidden by default because we expect images */
+  font-weight: bold;
+  display: none; /* hidden by default because we expect images */
   color: black;
 }
