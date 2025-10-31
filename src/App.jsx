@@ -29,7 +29,7 @@ function App() {
 
   // create full 52-card deck
   function createDeck() {
-    const newDeckVal = [];
+    const newDeckVal = []; // array to store 52 cards
     for (let suit of suits) {
       for (let unit of units) {
         const suitName =
@@ -52,8 +52,9 @@ function App() {
             ? "king"
             : unit;
 
-        const imageFile = `${valueName}_of_${suitName}.png`;
+        const imageFile = `${valueName}_of_${suitName}.png`;// build image filename
 
+      
         newDeckVal.push({
           newSuit: suit,
           newUnit: unit,
@@ -61,14 +62,14 @@ function App() {
         });
       }
     }
-    return newDeckVal;
+    return newDeckVal;// return the 52 cards after storing them in a array.
   }
 
   // state variables
-  const [cardsLeft, setCardsLeft] = useState(createDeck());
-  const [cardsVisible, setCardsVisible] = useState([]);
-  const [currentSelectedCard, setSelectedCard] = useState(null);
-  const [text, setText] = useState("Welcome to the game of cards");
+  const [cardsLeft, setCardsLeft] = useState(createDeck());// intialise the cards 
+  const [cardsVisible, setCardsVisible] = useState([]);//cards currently visible on screen 
+  const [currentSelectedCard, setSelectedCard] = useState(null);// card selected
+  const [text, setText] = useState("Welcome to the game of cards");//text at top
 
   // update text when deck changes
   useEffect(() => {
@@ -82,11 +83,11 @@ function App() {
       alert("Deck is empty!");
       return;
     }
-    const newCard = cardsLeft[cardsLeft.length - 1];
-    const newDeck = cardsLeft.slice(0, -1);
+    const newCard = cardsLeft[cardsLeft.length - 1];// pull out last card
+    const newDeck = cardsLeft.slice(0, -1);// remove card and store the deck 
 
     setCardsLeft(newDeck);
-    setCardsVisible([...cardsVisible, newCard]);
+    setCardsVisible([...cardsVisible, newCard]);// store in new array
   }
 
   // deal 5 random cards
@@ -124,18 +125,17 @@ function App() {
     setSelectedCard(null);
     setText("Deck reset. Let's play again!");
   }
- function tossCard() {
-   if (currentSelectedCard === null) {
-     alert("Select a card to toss!");
-     return;
-   }
+  function tossCard() {
+    if (currentSelectedCard === null) {
+      alert("Select a card to toss!");
+      return;
+    }
 
-   const updated = [...cardsVisible];
-   updated.splice(currentSelectedCard, 1); // remove selected card
-   setCardsVisible(updated);
-   setSelectedCard(null);
- }
-
+    const updated = [...cardsVisible];
+    updated.splice(currentSelectedCard, 1); // remove selected card
+    setCardsVisible(updated);
+    setSelectedCard(null);
+  }
 
   function regroupCards() {
     const shuffled = [...cardsVisible].sort(() => Math.random() - 0.5);
@@ -161,6 +161,7 @@ function App() {
       "K",
     ];
 
+    // pick random suit and value
     const randomSuit = suits[Math.floor(Math.random() * suits.length)];
     const randomUnit = units[Math.floor(Math.random() * units.length)];
 
@@ -239,8 +240,7 @@ function App() {
       />
       <footer className="footer">
         <p>
-          © 2025 Anmoldeep Kaur — React Card Deck Game |
-          
+          © {new Date().getFullYear()} Anmoldeep Kaur — React Card Deck Game |
         </p>
       </footer>
     </div>

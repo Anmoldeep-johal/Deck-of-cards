@@ -1,11 +1,28 @@
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
- background: #053763;
-background: linear-gradient(90deg, rgba(5, 55, 99, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+  background: linear-gradient(135deg, #d0bdf4, #8458B3, #a28089);
+  background-size: 200% 200%;
+  animation: gradientFlow 12s ease infinite;
   color: white;
   text-align: center;
+  min-height: 100vh;
 }
+
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 .app h1 {
   margin: 8px 0 18px;
